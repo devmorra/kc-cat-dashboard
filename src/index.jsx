@@ -2,11 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { SignIn } from './components/SignIn';
 import reportWebVitals from './reportWebVitals';
+import { FirebaseAppProvider, useSigninCheck } from 'reactfire';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import {firebaseConfig} from './firebaseConfig';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path='signin' element={<SignIn/>}></Route>
+      </Routes>
+    </BrowserRouter>
+    </FirebaseAppProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

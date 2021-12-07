@@ -1,13 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
+import {useUser} from 'reactfire';
+
 
 function App() {
+  const {status, data:user} = useUser();
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Hello {user.displayName}
         </p>
         <a
           className="App-link"
