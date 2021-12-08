@@ -1,20 +1,41 @@
 import React from "react";
 import { useAuth, useSigninCheck} from "reactfire";
-import firebase from "firebase/app";
+// import firebase from "firebase/app";
 import { Button } from "@mui/material";
-import "firebase/auth";
-// import {GoogleAuthProvider, getAuth, signInWithPopup} from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 export function SignIn() {
-  // const provider = new GoogleAuthProvider();
 
-  const auth = useAuth();
+  // const auth = useAuth();
   const { status, data: signInCheckResult } = useSigninCheck();
 
+  const auth = getAuth();
+  const provider = GoogleAuthProvider();
+
+
   const sign_in = async () => {
-    const response = await auth.signInWithPopup(
-      new firebase.auth.GoogleAuthProvider()
-    );
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+    });
+
+    // const response = await auth.signInWithPopup(
+    //   new firebase.auth.GoogleAuthProvider()
+    // );
   };
 
   const sign_out = async () => {
