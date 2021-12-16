@@ -1,1 +1,1 @@
-export CatRow from './CatRow';
+export {CatRow} from './CatRow';

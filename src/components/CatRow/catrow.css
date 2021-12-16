@@ -1,0 +1,12 @@
+.rowContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.catImgContainer{
+    max-width: 200px;
+    max-height: 200px;
+    width: 200px;
+    height: auto;
+}

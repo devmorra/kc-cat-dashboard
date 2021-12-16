@@ -14,7 +14,7 @@ export const CatForm = () =>{
     const [picture, setPicture] = useState();
     
     const {register, handleSubmit} = useForm({})
-    console.log(uuidv4());
+    // console.log(uuidv4());
 
 
 
@@ -28,7 +28,7 @@ export const CatForm = () =>{
     async function uploadPhoto(data, uuid){
         // https://www.newline.co/@satansdeer/handling-file-fields-using-react-hook-form--93ebef46
         // const file = data.image[0];
-        const storageRef = ref(storage, `cats/${uuid}`);
+        const storageRef = ref(storage, uuid);
         // const fileRef = storageRef.child(uuid);
         uploadBytes(storageRef, data).then(() => {
           console.log("Uploaded a file");
@@ -47,13 +47,13 @@ export const CatForm = () =>{
         // console.log(data)
         // console.log(event)
         // console.log(picture)
-        // window.location.reload();
         let uuid = uuidv4();
         data.uuid = uuid;
         await uploadPhoto(picture, uuid)
         delete data.picture;
         await addCat(data, uuid);
         event.target.reset();
+        window.location.reload();
     }
 
     const onChange = (e) => {
