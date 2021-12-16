@@ -2,7 +2,7 @@ import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { collection, query, orderBy, getDocs } from 'firebase/firestore';
 import { useFirestore } from 'reactfire';
-import { CatForm, CatRow } from '..';
+import { AddCatForm, CatRow } from '..';
 import { useState } from 'react';
 import { useGetData } from '../../custom-hooks/FetchCats';
 
@@ -13,6 +13,7 @@ export function Dashboard(){
     const db = useFirestore();
     const catsRef = collection(db, "cats");
     const catQuery = query(catsRef);
+    
 
     // async function getCats() {
     //     setCats(await getDocs(catQuery));
@@ -34,18 +35,20 @@ export function Dashboard(){
         // })
         let catArr = []
         catData.forEach( (cat) =>{
-            catArr.push(cat.data())
+            let catData = cat.data()
+            catData.doc = cat
+            catArr.push(catData)
         })
         console.log(catArr)
         return (
         <div>
             <div>Wow dashboard</div>
-            {catArr.map( ({name, Location, age, notes, uuid}) => {
+            {catArr.map( ({name, location, age, notes, uuid, doc}) => {
                 return(
-                    <CatRow uuid={uuid} name={name} location={Location} age={age} notes={notes}></CatRow>
+                    <CatRow uuid={uuid} name={name} location={location} age={age} notes={notes} doc={doc}></CatRow>
                 )
             })}
-            <CatForm></CatForm>
+            <AddCatForm></AddCatForm>
 
         </div>
         

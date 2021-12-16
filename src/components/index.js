@@ -1,4 +1,5 @@
 export {Dashboard} from './Dashboard';
 export {SignIn} from './SignIn';
-export {CatForm} from './CatForm';
+export {AddCatForm} from './AddCatForm';
 export {CatRow} from './CatRow'
+export {EditCatForm} from './EditCatForm';
