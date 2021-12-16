@@ -9,6 +9,7 @@ import {
   initializeFirestore,
   enableIndexedDbPersistence,
 } from "@firebase/firestore";
+import { getStorage } from "firebase/storage";
 import {
   FirebaseAppProvider,
   AuthProvider,
@@ -18,6 +19,7 @@ import {
   FirestoreProvider,
   useInitFirestore,
   useAuth,
+  StorageProvider
 } from "reactfire";
 import {Button} from '@mui/material';
 
@@ -61,6 +63,7 @@ function AppWrapper() {
   // these hooks cannot be used outside the top level so we need to create a wrapper app
   const app = useFirebaseApp();
   const authSDK = getAuth(app);
+  const storage = getStorage(app);
   const { status, data: firestoreInstance } = useInitFirestore(
     async (firebaseApp) => {
       const db = initializeFirestore(firebaseApp, {});
@@ -77,7 +80,9 @@ function AppWrapper() {
   return (
     <AuthProvider sdk={authSDK}>
       <FirestoreProvider sdk={firestoreInstance}>
-        <App></App>
+        <StorageProvider sdk={storage}>
+          <App></App>
+        </StorageProvider>
       </FirestoreProvider>
     </AuthProvider>
   );
