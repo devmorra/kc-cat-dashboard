@@ -10,3 +10,19 @@
     width: 200px;
     height: auto;
 }
+
+.catImgCell{
+    width: 200px;
+    height: auto;
+}
+
+td{
+    border: 1px solid black;
+}
+
+table{
+    width: 100%;
+}
+/* div{
+    background-color: rgb(52, 52, 165);
+} */

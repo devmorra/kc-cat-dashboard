@@ -78,20 +78,21 @@ export const CatRow = (props) => {
     return "Loading";
   } else {
     return (
-      <div className="rowContainer">
-        <div>
+      <tr > 
+        {/* className="rowContainer" */}
+        <td className="catImgCell">
           <img className="catImgContainer" src={imgurl} alt="" />
-        </div>
-        <div>{props.name}</div>
-        <div>Location {props.location}</div>
-        <div>{props.age}</div>
-        <div>{props.notes}</div>
-        <div>
+        </td>
+        <td>{props.name}</td>
+        <td>{props.location}</td>
+        <td>{props.age}</td>
+        <td>{props.notes}</td>
+        <td>
           <Button onClick={handleEditOpen}>Edit</Button>
-        </div>
-        <div>
+        </td>
+        <td>
           <Button onClick={handleDeleteOpen}>Delete</Button>
-        </div>
+        </td>
         <Dialog open={editOpen} onClose={handleEditClose}>
           <DialogTitle>Edit {`${props.name}`}:</DialogTitle>
           <DialogContent>
@@ -116,7 +117,7 @@ export const CatRow = (props) => {
           <Button onClick={deleteCat}>Delete</Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </tr>
     );
   }
 };

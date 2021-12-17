@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import "./index.css";
+import "./index.css";
 
 import reportWebVitals from "./reportWebVitals";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -40,11 +40,10 @@ function App() {
     await auth.signOut();
   }
 
-  if (userStatus !== "loading" && user != null) {
-    console.log(user);
+  if (userStatus !== "loading" && user != null && user.email.endsWith("@kittyconnection.net")) {
     return (
       <div>
-        <h1>Hello {user.displayName}</h1>
+        {/* <h1>Hello {user.displayName}</h1> */}
         <Button onClick={signOut}>Sign Out</Button>
         <Dashboard/>
       </div>

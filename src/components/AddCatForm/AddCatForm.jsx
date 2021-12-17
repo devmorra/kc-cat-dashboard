@@ -50,7 +50,7 @@ export const AddCatForm = () =>{
             <form onSubmit = {handleSubmit(onSubmit)}>
                 <div>
                     <label htmlFor="picture">Picture</label>
-                    <input {...register("picture", {required: true})} type="file" onChange={onChange}></input>
+                    <input {...register("picture", {required: true})} type="file" onChange={onChange} accept="image/*"></input>
 
                 </div>
                 <div>
