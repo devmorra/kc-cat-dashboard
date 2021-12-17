@@ -36,16 +36,16 @@ export function Dashboard(){
         let catArr = []
         catData.forEach( (cat) =>{
             let catData = cat.data()
-            catData.doc = cat
+            catData.docID = cat.id
             catArr.push(catData)
         })
         console.log(catArr)
         return (
         <div>
             <div>Wow dashboard</div>
-            {catArr.map( ({name, location, age, notes, uuid, doc}) => {
+            {catArr.map( ({name, location, age, notes, uuid, docID}) => {
                 return(
-                    <CatRow uuid={uuid} name={name} location={location} age={age} notes={notes} doc={doc}></CatRow>
+                    <CatRow uuid={uuid} name={name} location={location} age={age} notes={notes} docID={docID}></CatRow>
                 )
             })}
             <AddCatForm></AddCatForm>

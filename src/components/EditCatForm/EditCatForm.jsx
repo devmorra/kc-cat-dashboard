@@ -20,38 +20,15 @@ export const EditCatForm = (props) => {
   const [picture, setPicture] = useState();
   const catsRef = collection(firestore, "cats");
   const catQuery = query(catsRef, where("uuid", "==", props.uuid));
-  const [catDocID, setCatDocID] = useState([]);
-    useEffect(() => {
-        getCatDocID()
-    }, [])
-  
-  async function getCatDocID() {
-    const querySnapshot = await getDocs(catQuery);
-    // console.log(catQuery)
-    // console.log(querySnapshot)
-    setCatDocID(querySnapshot.docs[0].id);
-    // console.log(catDocID)
-  }
-  console.log("updateRef", catDocID);
 
   const { register, handleSubmit } = useForm({});
 
   async function updateCat(data, uuid) {
-      data.uuid = props.uuid
-    //   catDocID.update(data)
-    const docRef = doc(firestore, "cats", catDocID)
+    data.uuid = props.uuid
+    const docRef = doc(firestore, "cats", props.docID)
     await updateDoc(docRef, data);
     console.log(`Updated ${props.uuid} document in firestore`);
-    // console.log(doc)
   }
-
-  // async function uploadPhoto(data, uuid){
-  //     // https://www.newline.co/@satansdeer/handling-file-fields-using-react-hook-form--93ebef46
-  //     const storageRef = ref(storage, uuid);
-  //     uploadBytes(storageRef, data).then(() => {
-  //       console.log("Uploaded a file");
-  //     });
-  // }
 
   const onSubmit = async (data, event) => {
     event.preventDefault();
@@ -62,13 +39,10 @@ export const EditCatForm = (props) => {
     window.location.reload();
   };
 
-  // const onChange = (e) => {
-  //     setPicture(e.target.files[0])
-  // }
-  if (catDocID == []) {
+
+  if (props.docID == []) {
     return <div>Loading</div>;
   } else {
-    console.log("catDocID", catDocID);
 
     return (
       <div>
